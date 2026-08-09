@@ -4,3 +4,6 @@
 
 /*/node_modules
 /be/data/*
+/be/_data/*
+/plans
+/be/.env

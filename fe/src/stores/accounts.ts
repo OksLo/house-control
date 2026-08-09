@@ -18,6 +18,7 @@ interface IAccount {
 
 export const useAccountsStore = defineStore('accountsStore', () => {
   const accounts = ref<IAccount[]>([]);
+
   async function getAccounts() {
     const response = await fetch('http://localhost:3000/v1/api/accounts');
     if (response.ok) { // if HTTP-status is 200-299

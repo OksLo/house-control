@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80" viewBox="0 0 120 80">
+  <defs>
+    <clipPath id="frame-clip">
+      <rect x="36" y="23" width="48" height="34" rx="3"/>
+    </clipPath>
+  </defs>
+  <rect x="35" y="22" width="50" height="36" rx="4" fill="none" stroke="#e4e4e7" stroke-width="2"/>
+  <circle cx="46" cy="33" r="5" fill="none" stroke="#d4d4d8" stroke-width="2"/>
+  <polyline points="35,58 55,38 68,52 78,42 85,58" fill="none" stroke="#d4d4d8" stroke-width="2" stroke-linejoin="round" clip-path="url(#frame-clip)"/>
+</svg>

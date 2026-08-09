@@ -9,11 +9,16 @@ apiRouter.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 })
+// owners
+apiRouter.get('/owners', apiController.getOwners)
 // accounts
 apiRouter.get('/accounts', apiController.getAccounts);
-apiRouter.get('/voting/:voteId', apiController.getVoting);
+apiRouter.put('/accounts', apiController.updateAccount);
 // voting
+apiRouter.get('/voting/:voteId', apiController.getVoting);
 apiRouter.put('/voting', apiController.updateVoting);
 apiRouter.put('/voting/votestatus', apiController.updateVotedStatusVoting);
+// news
+apiRouter.get('/news', apiController.getNews);
 
 module.exports = apiRouter;
