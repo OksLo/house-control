@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { updateFlat } from '@/src/lib/api';
+import { updateFlat } from '@/src/lib/actions';
 import ButtonIcon from "@/src/components/core/ButtonIcon";
 
 import { FLAT_FIELDS, type IFlat } from './types';
