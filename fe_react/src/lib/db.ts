@@ -6,6 +6,11 @@ declare global {
     var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
+export enum DB_COLLECTIONS {
+    units = 'units',
+    owners = 'owners',
+}
+
 const clientPromise: Promise<MongoClient> =
     process.env.NODE_ENV === 'development'
         ? (global._mongoClientPromise ??= new MongoClient(uri).connect())

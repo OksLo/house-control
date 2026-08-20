@@ -11,7 +11,7 @@ interface INavLink {
 const NAV_LINKS: INavLink[] = [
     { href: '/', text: 'Home' },
     { href: '/owners', text: 'Owners' },
-    { href: '/flats', text: 'Flats' },
+    { href: '/units', text: 'Units' },
     { href: '/voting', text: 'Voting' },
 ]
 

@@ -2,33 +2,17 @@
 
 import { ObjectId } from 'mongodb';
 import { getDb } from './db';
-import { type IFlat } from '@/src/components/flats/types';
+import { type IUnit } from '@/src/components/units/types';
+import { DB_COLLECTIONS } from './db';
+import { getUnit } from "@/src/lib/api";
 
-export async function updateFlat(id: string, data: Partial<IFlat>): Promise<IFlat> {
+export async function updateFlat(id: string, data: Partial<IUnit>): Promise<IUnit> {
     const db = await getDb();
     // owners come from a $lookup on the owners collection — not stored on rooms documents
-    const { owners, ...roomFields } = data;
-    await db.collection('rooms').updateOne(
+    const { owner, ...roomFields } = data;
+    await db.collection(DB_COLLECTIONS.units).updateOne(
         { _id: new ObjectId(id) },
         { $set: roomFields },
     );
-    const [flat] = await db.collection('rooms').aggregate([
-        { $match: { _id: new ObjectId(id) } },
-        {
-            $lookup: {
-                from: 'owners',
-                localField: 'cadastralNumber',
-                foreignField: 'cadastralNumber',
-                as: 'owners',
-            },
-        },
-    ]).toArray();
-    return {
-        ...flat,
-        _id: String(flat._id),
-        owners: (flat.owners as Array<Record<string, unknown>>).map((o) => ({
-            ...o,
-            _id: String(o._id),
-        })),
-    } as IFlat;
+    return (await getUnit(id) as IUnit);
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { updateFlat } from '@/src/lib/api';
+import { updateFlat } from '@/src/lib/actions';
 import { type IOwner, OWNER_FIELDS } from './types';
 import ButtonIcon from '@/src/components/core/ButtonIcon';
 

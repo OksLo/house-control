@@ -2,7 +2,7 @@ const mongoClient = require('../db');
 const ObjectId = require('mongodb').ObjectId;
 
 const COLLECTIONS = {
-  rooms: 'rooms',
+  units: 'units',
   owners: 'owners',
   news: 'news',
 }
@@ -21,7 +21,7 @@ exports.getOwners = async (req, res) => {
 /* Accounts */
 exports.getAccounts = async (req, res) => {
   const accounts = [];
-  const accountsCursor = mongoClient.db(DB_NAME).collection(COLLECTIONS.rooms).aggregate( [
+  const accountsCursor = mongoClient.db(DB_NAME).collection(COLLECTIONS.units).aggregate( [
     {
       $lookup:
         {
