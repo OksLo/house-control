@@ -2,8 +2,8 @@ import { ObjectId } from 'mongodb';
 import { type IOwner } from '@/src/components/owners/types';
 import { type IUnit } from '@/src/components/units/types';
 import { type INews } from '@/src/components/news/types';
-import { getDb } from './db';
-import { DB_COLLECTIONS } from './db';
+
+import { getDb, DB_COLLECTIONS } from './db';
 
 
 /* Owners */

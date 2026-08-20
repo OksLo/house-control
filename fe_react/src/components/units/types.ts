@@ -28,7 +28,7 @@ export const UNIT_FIELDS: IUnitField[] = [
         name: 'owner',
         title: 'Owner',
         isReadOnly: true,
-        render: (flat) => flat.owner.owner,
+        render: (unit) => unit.owner.owner,
     },
     { name: 'cadastralNumber', title: 'Cadastral #', isReadOnly: true },
     { name: 'note', title: 'Note', isReadOnly: false, className: 'w-36' },

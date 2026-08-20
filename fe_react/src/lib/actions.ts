@@ -1,10 +1,10 @@
 'use server';
 
 import { ObjectId } from 'mongodb';
-import { getDb } from './db';
 import { type IUnit } from '@/src/components/units/types';
-import { DB_COLLECTIONS } from './db';
-import { getUnit } from "@/src/lib/api";
+
+import { getDb, DB_COLLECTIONS } from './db';
+import { getUnit } from "./api";
 
 export async function updateFlat(id: string, data: Partial<IUnit>): Promise<IUnit> {
     const db = await getDb();
