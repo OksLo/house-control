@@ -1,30 +1,30 @@
 'use client';
 
 import { useState } from 'react';
-import { updateFlat } from '@/src/lib/api';
+import { updateFlat } from '@/src/lib/actions';
 import ButtonIcon from "@/src/components/core/ButtonIcon";
 
-import { FLAT_FIELDS, type IFlat } from './types';
+import { UNIT_FIELDS, type IUnit } from './types';
 
-type Draft = Partial<Record<keyof IFlat, unknown>>;
+type Draft = Partial<Record<keyof IUnit, unknown>>;
 
-export default function FlatsTableRow({ flat, index }: {
-    flat: IFlat;
+export default function UnitsTableRow({ unit, index }: {
+    unit: IUnit;
     index: number;
 }) {
-    const fields = FLAT_FIELDS;
+    const fields = UNIT_FIELDS;
     const [isEditing, setIsEditing] = useState(false);
-    const [currentFlat, setCurrentFlat] = useState<IFlat>(flat);
-    const [draftFlat, setDraftFlat] = useState<Draft>({});
+    const [currentUnit, setCurrentUnit] = useState<IUnit>(unit);
+    const [draftUnit, setDraftUnit] = useState<Draft>({});
 
     function startEdit() {
-        setDraftFlat(
+        setDraftUnit(
             Object.fromEntries(
                 fields
                     .filter((f) => !f.isReadOnly)
                     .map((f) => [
                         f.name,
-                        f.render ? String(f.render(currentFlat)) : currentFlat[f.name],
+                        f.render ? String(f.render(currentUnit)) : currentUnit[f.name],
                     ])
             )
         );
@@ -32,8 +32,8 @@ export default function FlatsTableRow({ flat, index }: {
     }
 
     async function handleSave() {
-        await updateFlat(currentFlat._id, draftFlat as Partial<IFlat>);
-        setCurrentFlat((prev) => ({ ...prev, ...draftFlat } as IFlat));
+        await updateFlat(currentUnit._id, draftUnit as Partial<IUnit>);
+        setCurrentUnit((prev) => ({ ...prev, ...draftUnit } as IUnit));
         setIsEditing(false);
     }
 
@@ -45,11 +45,11 @@ export default function FlatsTableRow({ flat, index }: {
                     <td key={field.name} className="px-4 py-3">
                         {editable ? (
                             <input
-                                type={typeof currentFlat[field.name] === 'number' ? 'number' : 'text'}
-                                value={String(draftFlat[field.name] ?? '')}
-                                onChange={(e) => setDraftFlat((prev) => ({
+                                type={typeof currentUnit[field.name] === 'number' ? 'number' : 'text'}
+                                value={String(draftUnit[field.name] ?? '')}
+                                onChange={(e) => setDraftUnit((prev) => ({
                                     ...prev,
-                                    [field.name]: typeof currentFlat[field.name] === 'number'
+                                    [field.name]: typeof currentUnit[field.name] === 'number'
                                         ? Number(e.target.value)
                                         : e.target.value,
                                 }))}
@@ -57,8 +57,8 @@ export default function FlatsTableRow({ flat, index }: {
                             />
                         ) : (
                             field.render
-                                ? field.render(currentFlat)
-                                : currentFlat[field.name] as React.ReactNode
+                                ? field.render(currentUnit)
+                                : currentUnit[field.name] as React.ReactNode
                         )}
                     </td>
                 );
